@@ -1,0 +1,15 @@
+---
+section:
+    header:
+        keyword: vpc
+        parameters:
+            - 'aws_vpc'
+            - '$.name'
+    children:
+        - property:
+              key: id
+              value: '$.id'
+        - property:
+              key: ip
+              value: '$.ip'
+...

@@ -1,0 +1,13 @@
+---
+infra:
+  directory: tests/realistic/result
+  children:
+    - loop:
+        through: '$.instances'
+        template:
+          source:
+            filename: tests/realistic/instance.t.yml
+    - source:
+        input: '$.vpc'
+        filename: tests/realistic/vpc.t.yml
+...

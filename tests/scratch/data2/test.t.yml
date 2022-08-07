@@ -1,19 +1,23 @@
 ---
 infrastructure:
+  tags:
+    - infra
   directory: 'results/infra001'
   children:
-    - file:
+    - module:
+        tags:
+          - instances
         filename: 'tests.yml'
         children:
           - loop:
               through: "$.instances"
               template:
-                file:
+                module:
                   filename: 'instances/{{ $.tags[?(@.key == "Name")].value }}.tf'
                   children:
                     - source:
                         filename: "data2/instance.t.yml"
-    - file:
+    - module:
         filename: 'vpc/test.yml'
         children:
           - source:

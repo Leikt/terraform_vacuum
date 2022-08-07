@@ -1,15 +1,15 @@
 # Modules
-KW_SOURCE = 'source'
+KW_INFRA = 'infra'
+KW_MODULE = 'module'
 KW_SECTION = 'section'
-KW_FILE = 'file'
-KW_FILENAME = 'filename'
-KW_CHILDREN = 'children'
-KW_INFRA = 'infrastructure'
 KW_HEADER = 'header'
 KW_PROPERTY = 'property'
+KW_SOURCE = 'source'
 KW_LOOP = 'loop'
 
 # Parameters
+KW_FILENAME = 'filename'
+KW_CHILDREN = 'children'
 KW_DIRECTORY = 'directory'
 KW_KEYWORD = 'keyword'
 KW_IS_PROPERTY = 'is_property'

@@ -1,0 +1,37 @@
+{
+  "instances": [
+    {
+      "id": "i-ugiahofez55zefz",
+      "region": "eu-central-1",
+      "tags": [
+        {
+          "key": "Name",
+          "value": "myvm1548"
+        },
+        {
+          "key": "Patch Group",
+          "value": "lindev"
+        }
+      ]
+    },
+    {
+      "id": "i-oiezgjsvx89Q0",
+      "region": "eu-central-1",
+      "tags": [
+        {
+          "key": "Name",
+          "value": "anothervm12"
+        },
+        {
+          "key": "Patch Group",
+          "value": "linprd"
+        }
+      ]
+    }
+  ],
+  "vpc": {
+    "name": "bla",
+    "ip": "10.15.25.3",
+    "id": "vpc-6513ds1f65sdf"
+  }
+}

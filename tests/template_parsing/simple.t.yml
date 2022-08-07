@@ -1,0 +1,53 @@
+---
+infra:
+  directory: 'tests/template_parsing/results/simple/'
+  children:
+    - module:
+        filename: 'dummy.tf'
+        children:
+          - property:
+              key: Author
+              value: '~.author'
+          - property:
+              key: Message
+              value: "~.messages.hello"
+          - property:
+              key: Version
+              value: "~.version"
+          - section:
+              header:
+                keyword: address
+                parameters:
+                  - Pierce
+              children:
+                - property:
+                    key: Name
+                    value: "Nobody"
+          - loop:
+              through: '$.instances'
+              template:
+                section:
+                  header:
+                    keyword: resource
+                    parameters:
+                      - "aws_instance"
+                      - '$.tags[?(@.key == "Name")].value'
+                  children:
+                    - property:
+                        key: id
+                        value: '$.id'
+                    - section:
+                        header:
+                          keyword: tags
+                          is_property: yes
+                        children:
+                          - loop:
+                              through: '$.tags'
+                              template:
+                                property:
+                                  key: '$.key'
+                                  value: '$.value'
+          - source:
+              input: '$.vpc'
+              filename: 'tests/template_parsing/simple.child.t.yml'
+...

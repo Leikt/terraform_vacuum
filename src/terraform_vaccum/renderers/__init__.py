@@ -235,8 +235,8 @@ class TInfraRenderer(TRenderer):
         return self
 
     def add(self, module: TFileRenderer) -> TInfraRenderer:
-        if not isinstance(module, TFileRenderer) and not isinstance(module, list):
-            raise ValueError('Infrastructure only take TModuleRenderer as children.')
+        # if not isinstance(module, TFileRenderer) and not isinstance(module, list):
+        #     raise ValueError('Infrastructure only take TModuleRenderer as children.')
 
         super().add(module)
         return self
