@@ -1,7 +1,13 @@
 from __future__ import annotations
 
 import os
+import re
 
+
+def _format_string(string: str) -> str:
+    if re.search(" ", string, ) is not None:
+        return '"{}"'.format(string)
+    return string
 
 class TRenderer:
     def __init__(self):
@@ -35,7 +41,11 @@ class TRenderer:
         return current
 
     def add(self, child: TRenderer) -> TRenderer:
-        self._children.append(child)
+        if isinstance(child, list):
+            for c in child:
+                self.add(c)
+        else:
+            self._children.append(child)
         return self
 
     def add_blank_lines(self, count: int = 1) -> TRenderer:
@@ -45,6 +55,12 @@ class TRenderer:
     def add_comment(self, comment: str) -> TRenderer:
         self.add(TCommentRenderer(comment))
         return self
+
+    def save(self) -> bool:
+        res = True
+        for child in self._children:
+            res = child.save() and res
+        return res
 
 
 class TSectionRenderer(TRenderer):
@@ -104,7 +120,7 @@ class THeaderRenderer(TRenderer):
 class TPropertyRenderer(TRenderer):
     def __init__(self, keyword: str, value: str, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self._keyword = keyword
+        self._keyword = _format_string(keyword)
         self._value = value
         self._raw = False
 
@@ -177,6 +193,8 @@ class TFileRenderer(TRenderer):
         return -1
 
     def set_filename(self, filename: str) -> TFileRenderer:
+        if filename.find('/') == -1:
+            filename = './' + filename
         self._filename = filename
         return self
 
@@ -193,7 +211,8 @@ class TFileRenderer(TRenderer):
         with open(self._filename, 'w') as file:
             file.write(content)
             print('File saved in {}'.format(self._filename))
-        return True
+
+        return super().save()
 
 
 class TInfraRenderer(TRenderer):
@@ -216,7 +235,7 @@ class TInfraRenderer(TRenderer):
         return self
 
     def add(self, module: TFileRenderer) -> TInfraRenderer:
-        if not isinstance(module, TFileRenderer):
+        if not isinstance(module, TFileRenderer) and not isinstance(module, list):
             raise ValueError('Infrastructure only take TModuleRenderer as children.')
 
         super().add(module)
@@ -232,8 +251,9 @@ class TInfraRenderer(TRenderer):
 
         pwd = os.path.dirname(__file__)
         os.chdir(self._directory)
-        for module in self._children:
-            module.save()
+        # for module in self._children:
+        #     module.save()
+        res = super().save()
         print('Infrastructure save in {}/'.format(self._directory))
         os.chdir(pwd)
-        return True
+        return res

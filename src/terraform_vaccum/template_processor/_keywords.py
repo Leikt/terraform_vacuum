@@ -1,0 +1,23 @@
+# Modules
+KW_SOURCE = 'source'
+KW_SECTION = 'section'
+KW_FILE = 'file'
+KW_FILENAME = 'filename'
+KW_CHILDREN = 'children'
+KW_INFRA = 'infrastructure'
+KW_HEADER = 'header'
+KW_PROPERTY = 'property'
+KW_LOOP = 'loop'
+
+# Parameters
+KW_DIRECTORY = 'directory'
+KW_KEYWORD = 'keyword'
+KW_IS_PROPERTY = 'is_property'
+KW_PARAMETERS = 'parameters'
+KW_KEY = 'key'
+KW_VALUE = 'value'
+KW_IS_RAW = 'is_raw'
+KW_LOOP_ITERATOR = 'through'
+KW_LOOP_TEMPLATE = 'template'
+KW_TAGS = 'tags'
+KW_INPUT = 'input'

@@ -1,0 +1,26 @@
+---
+section:
+  header:
+    keyword: 'resource'
+    parameters:
+      - 'aws_instance'
+      - '$.tags[?(@.key == "Name")].value'
+  children:
+    - property:
+        key: 'id'
+        value: '$.id'
+    - property:
+        key: 'region'
+        value: '$.region'
+    - section:
+        header:
+          keyword: 'tags'
+          is_property: yes
+        children:
+          - loop:
+              through: "$.tags"
+              template:
+                property:
+                  key: '$.key'
+                  value: '$.value'
+...

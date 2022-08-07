@@ -1,0 +1,7 @@
+pip~=22.2.2
+build~=0.8.0
+wheel~=0.37.1
+tomli~=2.0.1
+pyparsing~=3.0.9
+setuptools~=60.2.0
+PyYAML~=6.0

@@ -1,0 +1,15 @@
+---
+section:
+  header:
+    keyword: vpc
+    parameters:
+      - vpc
+      - "$.name"
+  children:
+    - property:
+        key: ip
+        value: '$.ip'
+    - property:
+        key: id
+        value: '$.id'
+...

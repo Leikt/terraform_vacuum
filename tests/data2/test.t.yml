@@ -1,0 +1,22 @@
+---
+infrastructure:
+  directory: 'results/infra001'
+  children:
+    - file:
+        filename: 'tests.yml'
+        children:
+          - loop:
+              through: "$.instances"
+              template:
+                file:
+                  filename: 'instances/{{ $.tags[?(@.key == "Name")].value }}.tf'
+                  children:
+                    - source:
+                        filename: "data2/instance.t.yml"
+    - file:
+        filename: 'vpc/test.yml'
+        children:
+          - source:
+              input: "$.vpc"
+              filename: "data2/vpc.t.yml"
+...
