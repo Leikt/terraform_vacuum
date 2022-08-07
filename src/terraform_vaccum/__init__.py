@@ -4,7 +4,7 @@ import os.path
 from .template_processor import Template, register_modules
 
 
-def _run(data_filename: str, template_filename: str, variable_filename: str = None) -> int:
+def run(data_filename: str, template_filename: str, variable_filename: str = None) -> int:
     for filename in [data_filename, template_filename, variable_filename]:
         if filename is not None and not os.path.exists(filename):
             raise FileNotFoundError('No such file as "{}"'.format(filename))
@@ -33,4 +33,4 @@ def cli(argv):
     parser.add_argument('-V', '--variables', type=str, default=None, metavar='FILE',
                         help='Variables files to use.')
     args = parser.parse_args(argv)
-    return _run(args.data, args.template, args.variables)
+    return run(args.data, args.template, args.variables)
