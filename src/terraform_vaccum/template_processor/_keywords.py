@@ -6,6 +6,8 @@ KW_HEADER = 'header'
 KW_PROPERTY = 'property'
 KW_SOURCE = 'source'
 KW_LOOP = 'loop'
+KW_COMMENT = 'comment'
+KW_BLANK_LINES = 'blank_lines'
 
 # Parameters
 KW_FILENAME = 'filename'

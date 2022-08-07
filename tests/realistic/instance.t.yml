@@ -2,6 +2,10 @@
 module:
   filename: 'instances/{{ $.tags[?(@.key == "Name")].value }}.tf'
   children:
+    - comment:
+        - '** INSTANCE {{ $.tags[?(@.key == "Name")].value }} **'
+        - 'Client: {{ ~.client.name }}'
+        - 'Author: {{ ~.author }}'
     - section:
         header:
           keyword: 'resource'
@@ -15,6 +19,8 @@ module:
           - property:
               key: 'region'
               value: '$.region'
+          - blank_lines: 1
+          - comment: 'Instance tags'
           - section:
               header:
                 keyword: 'tags'

@@ -2,6 +2,10 @@
 module:
   filename: 'vpc.tf'
   children:
+    - comment:
+        - '** VPC {{ $.name }} **'
+        - 'Author: {{ ~.author }}'
+        - 'Client: {{ ~.client.name }}'
     - section:
         header:
           keyword: vpc

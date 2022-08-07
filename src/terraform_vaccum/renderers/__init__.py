@@ -9,6 +9,7 @@ def _format_string(string: str) -> str:
         return '"{}"'.format(string)
     return string
 
+
 class TRenderer:
     def __init__(self):
         self._indent = 0
@@ -145,10 +146,10 @@ class TCommentRenderer(TRenderer):
         self._comment = comment
 
     def _compute_indentation(self, current: int) -> int:
-        return current
+        return current + 1
 
     def render(self):
-        return '# ' + self._comment
+        return self._render_line('#', self._comment)
 
 
 class TBlankLinesRenderer(TRenderer):

@@ -40,6 +40,9 @@ class Module:
         return self._expression_parser.parse(expression)
 
     def p_value(self, key: str, evaluate: bool = True, required: bool = True, default: str = None) -> any:
+        if not (isinstance(self._parameters, list) or isinstance(self._parameters, dict) or
+                isinstance(self._parameters, str)):
+            return default
         if key not in self._parameters:
             if required:
                 raise KeyError('Missing key "{}" in module parameters.'.format(key))
@@ -50,7 +53,7 @@ class Module:
         return value
 
     def p_raw(self, value: str, evaluate: bool = True):
-        if evaluate:
+        if evaluate and isinstance(value, str):
             return self._expr(value)
         return value
 

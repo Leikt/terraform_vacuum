@@ -74,10 +74,28 @@ class MLoop(Module):
 class MSource(Module):
     def _run(self) -> TRenderer:
         template_file = self.p_value(KW_FILENAME)
-        results = Template()\
-            .load_template(template_file)\
-            .set_data(self._data)\
-            .set_variables(self._variables)\
+        results = Template() \
+            .load_template(template_file) \
+            .set_data(self._data) \
+            .set_variables(self._variables) \
             .run()
         r = TRenderer()
         return r.add(results)
+
+
+class MComment(Module):
+    def _run(self) -> TRenderer:
+        r = TRenderer()
+        if isinstance(self._parameters, str):
+            self._parameters = [self._parameters]
+        for comment in self._parameters:
+            r.add_comment(self.p_raw(comment))
+        return r
+
+
+class MBlankLines(Module):
+    def _run(self) -> TRenderer:
+        r = TRenderer()
+        count = int(self._parameters)
+        r.add_blank_lines(count)
+        return r
